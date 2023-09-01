@@ -19,13 +19,13 @@ class FIrstViewController: UIViewController {
         return label
     }()
     
-    let backButton: UIButton = {
+    lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("BACK", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor.blue
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.addTarget(FIrstViewController.self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -60,7 +60,7 @@ class FIrstViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        
+        dismiss(animated: true, completion: nil)
     }
 
 }

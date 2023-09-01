@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var num = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,10 @@ class ViewController: UIViewController {
     
     // 2) 코드로 스토리보드 객체를 생성해서, 화면 이동
     @IBAction func storyboardWithCodeButtonTapped(_ sender: UIButton) {
-
-        
+        guard let secondVC = storyboard?.instantiateViewController(withIdentifier: "secondVC") as? SecondViewController else { return }
+        secondVC.someString = "안녕히계세요"
+        secondVC.modalPresentationStyle = .fullScreen
+        present(secondVC, animated: true)
         
         
         
@@ -39,11 +42,43 @@ class ViewController: UIViewController {
     @IBAction func storyboardWithSegueButtonTapped(_ sender: UIButton) {
         
 
-        
+        if num > 5 {
+            
+        } else {
+            performSegue(withIdentifier: "toThirdVC", sender: self)
+        }
         
         
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toThirdVC" {
+            let thirdVC = segue.destination as! ThirdViewController
+            thirdVC.modalPresentationStyle = .fullScreen
+            thirdVC.someString = "엄마상어"
+        }
+        if segue.identifier == "toFourthVC" {
+            let fourthVC = segue.destination as! FourthViewController
+            fourthVC.modalPresentationStyle = .fullScreen
+            fourthVC.someString = "뚜루루뚜뚜"
+        }
+        
+    }
+    
+
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if num > 5 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
+    
+    
     
 
     
